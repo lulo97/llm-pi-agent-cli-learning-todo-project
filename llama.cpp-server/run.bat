@@ -1,6 +1,6 @@
 llama-server.exe ^
   -m Opus4.7-Distill-GODsGhost-Codex-4B-Q5_K_M.gguf ^
-  -c 20000 ^
+  -c 40000 ^
   -ngl all ^
   -t 12 ^
   -tb 12 ^

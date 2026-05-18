@@ -28,3 +28,7 @@ Conclusion:
 - small model with small context can only do small tasks
 - test task = heavy, big task
 - dev task = easy task
+
+Maybe context limit is not setup properly
+- Check in pi setting
+- Check in llama.cpp -c flag
