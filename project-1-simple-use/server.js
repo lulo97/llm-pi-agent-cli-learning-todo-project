@@ -107,7 +107,11 @@ app.delete('/todos/:id', (req, res) => {
 });
 
 const PORT = 3000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 
+// Catch port conflicts or initialization crashes
+server.on('error', (error) => {
+  console.error('SERVER CRASHED WITH ERROR:', error);
+});
