@@ -20,3 +20,11 @@ When create task 4, it got error context overflow.
 
 Using small qwen 3.5 4gb model with pi agent for test task is often exceed 16k context max size.
 - Task 4 not done yet
+- Try again still can't finish
+-> Finish project
+
+Conclusion:
+- pi agent work great
+- small model with small context can only do small tasks
+- test task = heavy, big task
+- dev task = easy task

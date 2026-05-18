@@ -3,6 +3,21 @@ fetch('/todos').then(response => response.json()).then(todos => {
     filterTodos(todos);
 });
 
+// Handle filter input change
+const filterInput = document.getElementById('filter');
+filterInput.addEventListener('input', function(e) {
+    const filterValue = filterInput.value.trim();
+    if (filterValue) {
+        fetch(`/filter?filter=${encodeURIComponent(filterValue)}`).then(response => response.json()).then(filteredTodos => {
+            filterTodos(filteredTodos);
+        });
+    } else {
+        fetch('/todos').then(response => response.json()).then(todos => {
+            filterTodos(todos);
+        });
+    }
+});
+
 // Fetch single todo
 function fetchSingleTodo(id) {
     return fetch(`/todos/${id}`).then(response => response.json());
@@ -22,17 +37,29 @@ function renderTodos(todos) {
     });
 
     // Add filter buttons
-document.getElementById('filterBtnAll').addEventListener('click', () => {
-    filterTodos(todos);
-});
-document.getElementById('filterBtnActive').addEventListener('click', () => {
-    filterTodos(todos, 'active');
-});
-document.getElementById('filterBtnComplete').addEventListener('click', () => {
-    filterTodos(todos, 'complete');
-});
+    const filterBtnAll = document.getElementById('filterBtnAll');
+    filterBtnAll.addEventListener('click', () => {
+        filterBtnAll.click();
+    });
 
-// Add clear button
+    // Handle filter button clicks
+    const filterButtons = document.querySelectorAll('[data-test-id="filter-btn-"]');
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const filterValue = this.dataset.filter;
+            if (filterValue) {
+                filterInput.value = filterValue;
+                filterInput.dispatchEvent(new Event('input'));
+            } else {
+                filterInput.value = '';
+                fetch('/todos').then(response => response.json()).then(todos => {
+                    filterTodos(todos);
+                });
+            }
+        });
+    });
+
+    // Add clear button
 document.getElementById('clearBtn').addEventListener('click', () => {
     filterTodos(todos);
 });
@@ -70,6 +97,8 @@ document.getElementById('addForm').addEventListener('submit', function(e) {
     }).then(response => response.json()).then(todos => {
         renderTodos(todos);
         input.value = '';
+        filterInput.value = ''; // Clear filter input
+        filterInput.dispatchEvent(new Event('input'));
     });
 });
 

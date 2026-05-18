@@ -54,6 +54,19 @@ app.get('/todos', (req, res) => {
   res.json(filtered);
 });
 
+// GET /filter - Filter todos by filter value
+app.get('/filter', (req, res) => {
+  const filter = req.query.filter;
+  if (!filter) {
+    return res.json([]);
+  }
+  const todos = readTodos();
+  let filtered = todos;
+  // Case-insensitive filter
+  filtered = filtered.filter(t => t.content.toLowerCase().includes(filter.toLowerCase()));
+  res.json(filtered);
+});
+
 // GET /todos/:id - Read single todo
 app.get('/todos/:id', (req, res) => {
   const todos = readTodos();

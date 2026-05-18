@@ -12,10 +12,26 @@
 # Error details
 
 ```
-Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
 Call log:
-  - navigating to "http://localhost:3000/", waiting until "load"
+  - waiting for locator('#todo-list') to be visible
 
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - heading "Todo App" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - textbox "Enter a new todo..." [ref=e5]
+    - button "Add" [ref=e6] [cursor=pointer]
+  - generic [ref=e7]:
+    - textbox "Filter todos..." [ref=e8]
+    - button "All" [ref=e9] [cursor=pointer]
+    - button "Active" [ref=e10] [cursor=pointer]
+    - button "Complete" [ref=e11] [cursor=pointer]
+  - list
 ```
 
 # Test source
@@ -47,11 +63,11 @@ Call log:
   24 | 
   25 | test('should toggle back to incomplete', async ({ page }) => {
   26 |   // Navigate to the app
-> 27 |   await page.goto('/');
-     |              ^ Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+  27 |   await page.goto('/');
   28 |   
   29 |   // Wait for page to load
-  30 |   await page.waitForSelector('#todo-list', { timeout: 10000 });
+> 30 |   await page.waitForSelector('#todo-list', { timeout: 10000 });
+     |              ^ TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.
   31 |   
   32 |   // Add a todo
   33 |   await page.fill('#todo-input', 'Test todo 2');

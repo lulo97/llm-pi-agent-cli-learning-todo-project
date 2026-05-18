@@ -27,6 +27,12 @@
             <input type="text" id="todoInput" placeholder="Enter a new todo..." required data-test-id="todo-input">
             <button type="submit" data-test-id="btn-add">Add</button>
         </form>
+        <div id="filterContainer" style="margin-bottom: 15px;">
+            <input type="text" id="filter" placeholder="Filter todos..." data-test-id="filter">
+            <button id="filterBtnAll" style="padding: 8px 16px; background: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;" data-test-id="filter-btn-all">All</button>
+            <button id="filterBtnActive" style="padding: 8px 16px; background: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;" data-test-id="filter-btn-active">Active</button>
+            <button id="filterBtnComplete" style="padding: 8px 16px; background: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;" data-test-id="filter-btn-complete">Complete</button>
+        </div>
         <ul id="todoList" data-test-id="todo-list"></ul>
     </div>
     <script src="script.js"></script>
