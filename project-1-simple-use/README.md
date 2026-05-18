@@ -17,3 +17,6 @@ When create task 4, it got error context overflow.
 - /session to view current token use
 - Keep an eye in footer to view token left, if AI generating it show number but if done it show ?/total
     ↑11k ↓992 R18k ?/16k (auto)
+
+Using small qwen 3.5 4gb model with pi agent for test task is often exceed 16k context max size.
+- Task 4 not done yet

@@ -50,7 +50,7 @@
 - **script.js** - Added data-test-id to delete buttons
 - **e2e-test-runner.js** (NEW) - E2E test runner using Playwright
 - **run-e2e-tests.sh** (NEW) - Shell script to run E2E tests
-- **tasks/task-004.md** - Updated task file to mark as complete
+- **tasks/task-004.md** (NEW) - Task file documenting this work
 
 ### Summary
 All requirements from task-004.md have been implemented:
