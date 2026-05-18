@@ -11,3 +11,9 @@ After a task done then review and commit
 Rules for create a task .md file:
 - Structure: INPUT, PROCESS, OUTPUT
 - Task can be done under 1 minute
+
+When create task 4, it got error context overflow.
+- /compact to remove context saved
+- /session to view current token use
+- Keep an eye in footer to view token left, if AI generating it show number but if done it show ?/total
+    ↑11k ↓992 R18k ?/16k (auto)
