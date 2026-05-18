@@ -39,7 +39,11 @@ function renderTodos(todos) {
     // Add filter buttons
     const filterBtnAll = document.getElementById('filterBtnAll');
     filterBtnAll.addEventListener('click', () => {
-        filterBtnAll.click();
+        // Clear filter and show all
+        filterInput.value = '';
+        fetch('/todos').then(response => response.json()).then(todos => {
+            filterTodos(todos);
+        });
     });
 
     // Handle filter button clicks
@@ -53,6 +57,7 @@ function renderTodos(todos) {
             } else {
                 filterInput.value = '';
                 fetch('/todos').then(response => response.json()).then(todos => {
+                    var todos = todos;
                     filterTodos(todos);
                 });
             }
@@ -61,6 +66,7 @@ function renderTodos(todos) {
 
     // Add clear button
 document.getElementById('clearBtn').addEventListener('click', () => {
+    var todos = todos;
     filterTodos(todos);
 });
 
