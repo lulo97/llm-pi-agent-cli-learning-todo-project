@@ -56,7 +56,6 @@ app.get('/todos', (req, res) => {
 
 // GET /todos/:id - Read single todo
 app.get('/todos/:id', (req, res) => {
-app.get('/todos/:id', (req, res) => {
   const todos = readTodos();
   const todo = todos.find(t => t.id === parseInt(req.params.id));
   if (!todo) {
