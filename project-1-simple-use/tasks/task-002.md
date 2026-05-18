@@ -32,6 +32,7 @@
 ### Verification
 - GET /todos/:id returns single todo with complete status
 - PUT /todos/:id/toggle-complete toggles complete status
+- GET / serves index.html (fixed static file serving)
 - HTML shows checkbox next to each todo item
 - Checkbox changes state on change event
 - Server supports reading single todo and toggling complete status
