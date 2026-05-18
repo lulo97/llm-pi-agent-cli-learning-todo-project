@@ -1,0 +1,81 @@
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+
+const app = express();
+app.use(express.json());
+
+const DB_FILE = path.join(__dirname, 'todos.json');
+
+// Read todos from file
+function readTodos() {
+  try {
+    if (fs.existsSync(DB_FILE)) {
+      const data = fs.readFileSync(DB_FILE, 'utf8');
+      return JSON.parse(data);
+    }
+    return [];
+  } catch (error) {
+    console.error('Error reading todos:', error);
+    return [];
+  }
+}
+
+// Write todos to file
+function writeTodos(todos) {
+  try {
+    fs.writeFileSync(DB_FILE, JSON.stringify(todos, null, 2));
+  } catch (error) {
+    console.error('Error writing todos:', error);
+  }
+}
+
+// GET /todos - Read all todos
+app.get('/todos', (req, res) => {
+  const todos = readTodos();
+  res.json(todos);
+});
+
+// POST /todos - Add new todo
+app.post('/todos', (req, res) => {
+  const { content } = req.body;
+  if (!content) {
+    return res.status(400).json({ error: 'Todo content required' });
+  }
+  const todos = readTodos();
+  todos.push({ content, createdAt: new Date().toISOString() });
+  writeTodos(todos);
+  res.status(201).json(todos);
+});
+
+// PUT /todos/:id - Update todo
+app.put('/todos/:id', (req, res) => {
+  const { id, content } = req.body;
+  const todos = readTodos();
+  const index = todos.findIndex(t => t.id === parseInt(id));
+  if (index === -1) {
+    return res.status(404).json({ error: 'Todo not found' });
+  }
+  todos[index].content = content;
+  todos[index].updatedAt = new Date().toISOString();
+  writeTodos(todos);
+  res.json(todos);
+});
+
+// DELETE /todos/:id - Delete todo
+app.delete('/todos/:id', (req, res) => {
+  const { id } = req.params;
+  const todos = readTodos();
+  const index = todos.findIndex(t => t.id === parseInt(id));
+  if (index === -1) {
+    return res.status(404).json({ error: 'Todo not found' });
+  }
+  todos.splice(index, 1);
+  writeTodos(todos);
+  res.json({ success: true });
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});

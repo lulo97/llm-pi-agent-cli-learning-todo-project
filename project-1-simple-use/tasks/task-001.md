@@ -21,3 +21,16 @@
 - JSON file at `/tmp/todos.json` (or similar) storing todos
 - `index.html` rendering todos from database
 - Ability to add and delete todos via HTML form
+
+## STATUS: COMPLETED
+
+### Files Created
+- `server.js` - Express server with CRUD operations on JSON file
+- `index.html` - Todo app UI with form and list
+- `script.js` - Client-side logic for adding/deleting todos
+
+### Verification
+- Server starts on port 3000
+- JSON file at `todos.json` stores todos
+- `index.html` renders todos from database
+- Ability to add and delete todos via HTML form
