@@ -1,6 +1,6 @@
-// Fetch todos from server
+// Fetch todos with filter from server
 fetch('/todos').then(response => response.json()).then(todos => {
-    renderTodos(todos);
+    filterTodos(todos);
 });
 
 // Fetch single todo
@@ -21,14 +21,29 @@ function renderTodos(todos) {
         list.appendChild(li);
     });
 
-    // Add delete event listeners
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const id = parseInt(btn.dataset.id);
-            fetch(`/todos/${id}`, { method: 'DELETE' });
-        });
+    // Add filter buttons
+document.getElementById('filterBtnAll').addEventListener('click', () => {
+    filterTodos(todos);
+});
+document.getElementById('filterBtnActive').addEventListener('click', () => {
+    filterTodos(todos, 'active');
+});
+document.getElementById('filterBtnComplete').addEventListener('click', () => {
+    filterTodos(todos, 'complete');
+});
+
+// Add clear button
+document.getElementById('clearBtn').addEventListener('click', () => {
+    filterTodos(todos);
+});
+
+// Add delete event listeners
+document.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const id = parseInt(btn.dataset.id);
+        fetch(`/todos/${id}`, { method: 'DELETE' });
     });
-}
+});
 
 function escapeHtml(text) {
     const div = document.createElement('div');
@@ -58,15 +73,9 @@ document.getElementById('addForm').addEventListener('submit', function(e) {
     });
 });
 
-// Add delete event listeners
-document.querySelectorAll('.delete-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const id = parseInt(btn.dataset.id);
-        fetch(`/todos/${id}`, { method: 'DELETE' });
-    });
-});
+// Add filter event listeners
 
-// Add checkbox/toggle event listeners
+// Add filter event lists
 document.querySelectorAll('.todo-checkbox').forEach(checkbox => {
     checkbox.addEventListener('change', () => {
         const id = parseInt(checkbox.dataset.id);

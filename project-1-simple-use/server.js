@@ -31,13 +31,31 @@ function writeTodos(todos) {
   }
 }
 
-// GET /todos - Read all todos
+// GET /todos - Read all todos with filter/search
 app.get('/todos', (req, res) => {
   const todos = readTodos();
-  res.json(todos);
+  const search = req.query.search;
+  const filter = req.query.filter;
+  
+  let filtered = todos;
+  
+  // Filter by complete status
+  if (filter && filter !== 'all') {
+    filtered = todos.filter(t => t.complete.toString().toLowerCase() === filter);
+  }
+  
+  // Filter by search text
+  if (search) {
+    filtered = filtered.filter(t => 
+      t.content.toLowerCase().includes(search.toLowerCase())
+    );
+  }
+  
+  res.json(filtered);
 });
 
 // GET /todos/:id - Read single todo
+app.get('/todos/:id', (req, res) => {
 app.get('/todos/:id', (req, res) => {
   const todos = readTodos();
   const todo = todos.find(t => t.id === parseInt(req.params.id));
