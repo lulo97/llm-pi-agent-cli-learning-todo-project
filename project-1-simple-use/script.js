@@ -14,9 +14,9 @@ function renderTodos(todos) {
     todos.forEach(todo => {
         const li = document.createElement('li');
         li.innerHTML = `
-            <input type="checkbox" ${todo.complete ? 'checked' : ''} data-id="${todo.id}" class="todo-checkbox">
+            <input type="checkbox" ${todo.complete ? 'checked' : ''} data-id="${todo.id}" class="todo-checkbox" data-test-id="checkbox-${todo.id}">
             <span class="todo-content">${escapeHtml(todo.content)}</span>
-            <button class="delete-btn" data-id="${todo.id}">Delete</button>
+            <button class="delete-btn" data-id="${todo.id}" data-test-id="btn-delete-${todo.id}">Delete</button>
         `;
         list.appendChild(li);
     });
