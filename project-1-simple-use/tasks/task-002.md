@@ -17,7 +17,23 @@
 
 ## OUTPUT
 
-## STATUS: IN PROGRESS
+## STATUS: COMPLETED
+
+### Changes Made
+- Added `GET /todos/:id` endpoint to read single todo with complete status
+- Added `PUT /todos/:id/toggle-complete` endpoint to toggle complete status
+- Added checkbox to each todo item
+- Added toggle functionality that updates database on change
+
+### Files Modified
+- `server.js` - Added endpoints for single todo and toggle complete
+- `script.js` - Added checkbox rendering and toggle event handling
+
+### Verification
+- GET /todos/:id returns single todo with complete status
+- PUT /todos/:id/toggle-complete toggles complete status
+- HTML shows checkbox next to each todo item
+- Checkbox changes state on change event
 - Server supports reading single todo and toggling complete status
 - HTML shows checkbox next to each todo
 - Toggle button changes color based on complete/incomplete state

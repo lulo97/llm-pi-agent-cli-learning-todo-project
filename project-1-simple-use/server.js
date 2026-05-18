@@ -36,6 +36,36 @@ app.get('/todos', (req, res) => {
   res.json(todos);
 });
 
+// GET /todos/:id - Read single todo
+app.get('/todos/:id', (req, res) => {
+  const todos = readTodos();
+  const todo = todos.find(t => t.id === parseInt(req.params.id));
+  if (!todo) {
+    return res.status(404).json({ error: 'Todo not found' });
+  }
+  res.json(todo);
+});
+
+// PUT /todos/:id/toggle-complete - Toggle complete status
+app.put('/todos/:id/toggle-complete', (req, res) => {
+  const { id } = req.params;
+  const todos = readTodos();
+  const index = todos.findIndex(t => t.id === parseInt(id));
+  if (index === -1) {
+    return res.status(404).json({ error: 'Todo not found' });
+  }
+  todos[index].complete = !todos[index].complete;
+  todos[index].updatedAt = new Date().toISOString();
+  writeTodos(todos);
+  res.json(todos);
+});
+
+// PUT /todos/:id - Update todo
+app.put('/todos/:id', (req, res) => {
+  const todos = readTodos();
+  res.json(todos);
+});
+
 // POST /todos - Add new todo
 app.post('/todos', (req, res) => {
   const { content } = req.body;
