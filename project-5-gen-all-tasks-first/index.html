@@ -41,9 +41,15 @@
 
         // --- API Utility Functions ---
         async function fetchTodos() {
-            const response = await fetch('/todos');
-            if (!response.ok) throw new Error('Failed to fetch todos');
-            todos = await response.json();
+            try {
+                const response = await fetch('/todos');
+                if (!response.ok) throw new Error('Failed to fetch todos');
+                todos = await response.json();
+            } catch (error) {
+                console.error("Error fetching todos:", error);
+                todoListEl.innerHTML = '<p>Error loading todos. Please try again later.</p>';
+                return;
+            }
             renderTodos();
         }
 
@@ -123,7 +129,7 @@
                 descInput.value = '';
             } catch (error) {
                 console.error("Error adding todo:", error);
-                alert("Could not add todo. Check console for details.");
+                alert(`Could not add todo: ${error.message || 'Unknown error'}`);
             }
         });
 
@@ -149,7 +155,7 @@
                 }
             } catch (error) {
                 console.error(`Error performing ${action}:`, error);
-                alert(`Could not perform ${action}. Check console.`);
+                alert(`Could not perform ${action}: ${error.message || 'Unknown error'}`);
             }
         });
 
