@@ -33,6 +33,8 @@ let todos = loadTodos();
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+// Serve static files (frontend)
+app.use(express.static('.'));
 
 // --- Health Check (from Task 1) ---
 app.get('/health', (req, res) => {
@@ -100,14 +102,13 @@ app.put('/todos/:id', (req, res) => {
 // DELETE a todo
 app.delete('/todos/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const initialLength = todos.length;
+  const index = todos.findIndex(t => t.id === id);
   
-  todos = todos.filter(t => t.id !== id);
-
-  if (todos.length === initialLength) {
+  if (index === -1) {
     return res.status(404).json({ message: 'Todo not found' });
   }
   
+  todos.splice(index, 1);
   saveTodos(todos);
   res.status(204).send(); // No content on successful deletion
 });

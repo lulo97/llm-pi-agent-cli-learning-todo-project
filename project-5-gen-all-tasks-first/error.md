@@ -22,7 +22,7 @@ This will make `http://localhost:3000/` serve `index.html`.
 
 ---
 
-### 2. Race Condition in POST Endpoint (Critical)
+### 2. Race Condition in POST Endpoint (Critical) (Skip this because 4gb model looping forever)
 **File**: `index.js`, `POST /todos` endpoint
 
 The title validation and ID generation happen before `saveTodos(todos)`, creating a race condition:
