@@ -18,7 +18,7 @@
     <form id="todo-form">
         <input type="text" data-test-id="todo-title" id="todo-title" placeholder="Task title" required>
         <input type="text" id="todo-description" placeholder="Description (optional)">
-        <button type="submit">Add Todo</button>
+        <button type="submit" data-test-id="add-todo">Add Todo</button>
     </form>
 
     <h2>Your Tasks</h2>
@@ -109,7 +109,7 @@
                         <input type="checkbox" data-test-id="todo-checkbox-${todo.id}" data-action="toggle" data-id="${todo.id}">
                     </div>
                     <div class="actions">
-                        <button data-action="update" data-id="${todo.id}">${escapeHtml('Update')}</button>
+                        <button data-action="update" data-id="${todo.id}" data-test-id="update-todo">${escapeHtml('Update')}</button>
                         <button data-test-id="delete-todo" data-action="delete" data-id="${todo.id}">${escapeHtml('Delete')}</button>
                     </div>
                 `;

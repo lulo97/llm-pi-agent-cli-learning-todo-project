@@ -20,10 +20,10 @@ test.describe('Update Todo', () => {
     await page.getByText('Task to Update').click();
     await page.waitForTimeout(500);
 
-    // Enter new title
-    await page.keyboard.press('Enter');
+    // Click update button and enter new title
+    await page.getByTestId('update-todo').click();
     await page.getByPlaceholder('Enter new title:').fill('Updated Title');
-    await page.keyboard.press('Enter');
+    await page.getByTestId('update-todo').click();
 
     // Verify the update
     await expect(page.getByText('Updated Title')).toBeVisible();
@@ -34,10 +34,10 @@ test.describe('Update Todo', () => {
     await page.getByText('Task to Update').click();
     await page.waitForTimeout(500);
 
-    // Enter new description
-    await page.keyboard.press('Enter');
+    // Click update button and enter new description
+    await page.getByTestId('update-todo').click();
     await page.getByPlaceholder('Enter new description:').fill('Updated description');
-    await page.keyboard.press('Enter');
+    await page.getByTestId('update-todo').click();
 
     // Verify the update
     await expect(page.getByText('Task to Update (Updated description)')).toBeVisible();
@@ -48,9 +48,9 @@ test.describe('Update Todo', () => {
     await page.getByText('Task to Update').click();
     await page.waitForTimeout(500);
 
-    // Enter empty title (should not update)
-    await page.keyboard.press('Enter');
-    await page.keyboard.press('Enter');
+    // Click update button and submit without entering title (should not update)
+    await page.getByTestId('update-todo').click();
+    await page.getByTestId('update-todo').click();
 
     // Verify the title is still the same
     await expect(page.getByText('Task to Update')).toBeVisible();

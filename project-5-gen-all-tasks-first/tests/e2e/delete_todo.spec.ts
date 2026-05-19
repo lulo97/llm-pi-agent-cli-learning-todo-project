@@ -20,10 +20,8 @@ test.describe('Delete Todo', () => {
     await page.getByText('Task to Delete').click();
     await page.waitForTimeout(500);
 
-    // Click delete button
+    // Click delete button and confirm
     await page.getByTestId('delete-todo').click();
-
-    // Confirm deletion (default to yes)
     await page.getByRole('button', { name: /Are you sure/i }).check();
     await page.getByRole('button', { name: /Yes/i }).click();
 
