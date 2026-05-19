@@ -32,6 +32,13 @@
         const todoForm = document.getElementById('todo-form');
         let todos = [];
 
+        // --- Security: HTML escape function ---
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
         // --- API Utility Functions ---
         async function fetchTodos() {
             const response = await fetch('/todos');
@@ -92,12 +99,12 @@
 
                 itemDiv.innerHTML = `
                     <div>
-                        <strong>${todo.title}</strong> ${todo.description ? `(<small>${todo.description}</small>)` : ''}
+                        <strong>${escapeHtml(todo.title)}</strong> ${todo.description ? `<small>${escapeHtml(todo.description)}</small>` : ''}
                         <input type="checkbox" data-test-id="todo-checkbox-${todo.id}" data-action="toggle" data-id="${todo.id}">
                     </div>
                     <div class="actions">
-                        <button data-action="update" data-id="${todo.id}">Update</button>
-                        <button data-test-id="delete-todo" data-action="delete" data-id="${todo.id}">Delete</button>
+                        <button data-action="update" data-id="${todo.id}">${escapeHtml('Update')}</button>
+                        <button data-test-id="delete-todo" data-action="delete" data-id="${todo.id}">${escapeHtml('Delete')}</button>
                     </div>
                 `;
                 todoListEl.appendChild(itemDiv);

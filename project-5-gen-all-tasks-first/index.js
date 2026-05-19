@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
@@ -33,6 +34,8 @@ let todos = loadTodos();
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+// CORS
+app.use(cors());
 // Serve static files (frontend)
 app.use(express.static('.'));
 
