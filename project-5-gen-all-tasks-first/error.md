@@ -252,7 +252,7 @@ const loadTodos = () => {
 
 ---
 
-### 10. No Validation for Empty Todo List in Delete Tests
+### 10. No Validation for Empty Todo List in Delete Tests (Skip 4gb model looping)
 **File**: `tests/e2e/delete_todo.spec.ts`
 
 The test assumes todos exist before attempting deletion, but if something goes wrong with the `beforeEach` block, the test would fail.
@@ -288,7 +288,7 @@ This inconsistency can lead to confusion and maintenance issues.
 
 ---
 
-### 12. No Type Safety for API Responses
+### 12. No Type Safety for API Responses (skip this error, this project is js not ts)
 **File**: `index.html`
 
 The frontend assumes the API returns a specific shape, but there's no type checking. If the API returns different data, the app might crash or display incorrectly.
