@@ -10,3 +10,4 @@ Requirements:
     - `delete_todo.spec.js`
     - `read_todo.spec.js`
 - Each test file should be set up to use Playwright and target the `data-test-id` attributes from Task 4.
+- IMPORTANT: Don't run test command yet
